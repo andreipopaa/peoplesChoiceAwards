@@ -3,6 +3,8 @@
 <html lang="en-US">
 <head>
         <title>Project 5 Homepage</title>
+	<script type="text/javascript" src="http://judah/~hensche/Project3/jquery-2.1.3.js"></script>
+	<script src="http://judah/~hensche/Project5/Project5.js"></script>
         <?php
                 session_start();
         ?>
@@ -42,15 +44,24 @@
                         <input type="submit" value="Make Teams">
                 </form>
                 <br/>
+
+                <form method = "post" action = "newUser.php" onsubmit = "return validateForm()">
+			<br>
+			<label for = "username">New Username:<label>
+                        <input id = "txtUserName" type="text" name="username">
+			<br>
+			<label for = "password">Please enter Passpword:<label>
+                        <input id ="txtNewPassword" type ="password" name = "newPassword">
+                        <br>
+                        <label for = "password2">Please re-enter Passpword:<label>
+                        <input id ="txtConfirmPassword" type ="password" name = "confirmPassword" onchange = "checkPasswordMatch();">
+			<br>
+			<input type="submit" value="Make New User">
+			<br>
+                </form>
+
         </nav>
         <main>
-                <?php
-                        $currentProjResults = $_POST['projectResults'];
-                        echo 'You are viewing the results of '.$currentProjResults;
-
-                        //now fill space with ppl and results from data base
-
-                ?>
 
         </main>
         <footer>
