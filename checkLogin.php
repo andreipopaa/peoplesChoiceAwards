@@ -54,5 +54,4 @@ if($success){
 	$url = "Location: project5home.php";
 	header($url);
 }
-
 ?>
