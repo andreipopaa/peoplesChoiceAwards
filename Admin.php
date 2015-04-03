@@ -29,6 +29,9 @@
                                  exit;
                         }
                 ?>
+                <form method = "post" action = "logout.php">  
+                    <button type="submit" name = "logout">Logout</button>
+                </form>
                 <form method = "post" action = "maketeams.php">
                         <select name="projectResults">
                                 <option value="Project1">Project1</option>

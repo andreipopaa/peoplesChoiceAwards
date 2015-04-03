@@ -14,23 +14,26 @@
         <nav>
                 <?php
                         if(isset($_SESSION['username'])){
-                                echo 'Welcome, '.$_SESSION['username'];
+                            echo 'Welcome, '.$_SESSION['username'];
                         } else {
-                                echo 'Please log in.';
+                            echo 'Please log in.';
                         }
                 ?>
+                <form method = "post" action = "logout.php">  
+                    <button type="submit" name = "logout">Logout</button>
+                </form>
                 <form method = "post" action = "checkresults.php">
-			<select name="projectResults">
-  				<option value="Project1">Project1</option>
-                                <option value="Project2">Project2</option>
-                                <option value="Project3">Project3</option>
-                                <option value="Project4">Project4</option>
-                                <option value="Project5">Project5</option>
-                                <option value="Project6">Project6</option>
-                                <option value="Project7">Project7</option>
-			</select>
-			<input type="submit" value="check results">
-		</form>
+        			<select name="projectResults">
+          				<option value="Project1">Project1</option>
+                                        <option value="Project2">Project2</option>
+                                        <option value="Project3">Project3</option>
+                                        <option value="Project4">Project4</option>
+                                        <option value="Project5">Project5</option>
+                                        <option value="Project6">Project6</option>
+                                        <option value="Project7">Project7</option>
+        			</select>
+        			<input type="submit" value="check results">
+		        </form>
 		<br/>
                 <form method = "post" action = "vote.php">
                         <select name="projectResults">

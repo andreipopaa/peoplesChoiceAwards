@@ -19,6 +19,10 @@
 				echo 'Please log in.';
 			}
                 ?>
+        <form method = "post" action = "logout.php">  
+			<button type="submit" name = "logout">Logout</button>
+		</form>
+
 		<form method = "post" action = "checkLogin.php">
 			<p> 
 				<label for="username">Username:</label>
