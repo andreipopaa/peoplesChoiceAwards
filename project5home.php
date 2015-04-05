@@ -14,21 +14,48 @@
         <nav>
                 <?php 
                 	if(isset($_SESSION['username'])){
-				echo 'Welcome, '.$_SESSION['username'];
-			} else {
-				echo 'Please log in.';
-			}
+						echo 'Welcome, '.$_SESSION['username'];
+					} else {
+						echo 'Please log in.';
+					}
                 ?>
-        <form method = "post" action = "logout.php">  
-			<button type="submit" name = "logout">Logout</button>
+        <form method="post" action = "logout.php">
+			<button type="submit" name="logout">Logout</button>
 		</form>
 
-		<form method = "post" action = "checkLogin.php">
+		<form method="post" action="checkLogin.php">
 			<p> 
 				<label for="username">Username:</label>
-				<input type="text" name = "username"></input>
+				<select type="username" name="username">
+	            <?php
+                    $servername = "james";
+                    $username = "cs4220";
+                    $password = "";
+                    $dbname = "cs4220";
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+	                
+	                $sql = "SELECT username FROM APDH_users";
+	                $result = $conn->query($sql);
+
+	                if ($result->num_rows > 0) {
+                        // output data of each row
+	                    while($row = $result->fetch_array()) {
+	                        echo '<option value ="' . $row["username"] . '">'. $row["username"].'</option>';
+	                    }
+	                } else {
+                        echo "0 results";
+	                }
+	                 $conn->close();
+	            ?>                        
+	            </select>
 				<label for="password">password:</label>
-                                <input type="password" name = "password"></input>
+                    <input type="password" name = "password"></input>
 				<input type = "submit" name = "login"></input>
 			</p>
 		</form>

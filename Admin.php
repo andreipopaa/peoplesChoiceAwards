@@ -3,8 +3,8 @@
 <html lang="en-US">
 <head>
         <title>Project 5 Homepage</title>
-	<script type="text/javascript" src="http://judah/~hensche/Project3/jquery-2.1.3.js"></script>
-	<script src="http://judah/~hensche/Project5/Project5.js"></script>
+    <script type="text/javascript" src="http://judah/~hensche/Project3/jquery-2.1.3.js"></script>
+    <script src="http://judah/~hensche/Project5/Project5.js"></script>
         <?php
                 session_start();
         ?>
@@ -16,15 +16,15 @@
         </header>
         <nav>
                 <?php
-			$username = $_SESSION['username'];
+            $username = $_SESSION['username'];
                         if(isset($username)){
                                 if($username != 'Admin'){
-			                $url = "Location: project5home.php";
-			                header($url);
-                			exit;				
-				} else {
-					echo 'Welcome to the admin page';	
-				}
+                            $url = "Location: project5home.php";
+                            header($url);
+                            exit;               
+                } else {
+                    echo 'Welcome to the admin page';   
+                }
                         } else {
                                  $url = "Location: project5home.php";
                                  header($url);
@@ -49,19 +49,56 @@
                 <br/>
 
                 <form method = "post" action = "newUser.php" onsubmit = "return validateForm()">
-			<br>
-			<label for = "username">New Username:<label>
+            <br>
+            <label for = "username">New Username:<label>
                         <input id = "txtUserName" type="text" name="username">
-			<br>
-			<label for = "password">Please enter Passpword:<label>
+            <br>
+            <label for = "password">Please enter Passpword:<label>
                         <input id ="txtNewPassword" type ="password" name = "newPassword">
                         <br>
                         <label for = "password2">Please re-enter Passpword:<label>
                         <input id ="txtConfirmPassword" type ="password" name = "confirmPassword" onchange = "checkPasswordMatch();">
-			<br>
-			<input type="submit" value="Make New User">
-			<br>
+            <br>
+            <input type="submit" value="Make New User">
+            <br>
                 </form>
+
+
+
+                 <form method = "post" action = "removeStudent.php">
+                        <select name="removeStudent">
+                        <?php
+
+                                $servername = "james";
+                                $username = "cs4220";
+                                $password = "";
+                                $dbname = "cs4220";
+
+                                // Create connection
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                // Check connection
+                                if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
+                            
+                            $sql = "SELECT username FROM APDH_users";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                    // output data of each row
+                                while($row = $result->fetch_assoc()) {
+                                    echo '<option value ="' . $row["username"]. '">'. $row["username"].'</option>';
+                                }
+                            } else {
+                                    echo "0 results";
+                            }
+                            $conn->close();
+                        ?>                        
+                        </select>
+                        <input type="submit" value="Remove User">
+                </form>
+
+
 
         </nav>
         <main>
@@ -71,4 +108,3 @@
                 <h4>Page created by Dillon and Andrei</h4>
         </footer>
 </body>
-
