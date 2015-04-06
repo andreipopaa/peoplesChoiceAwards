@@ -30,6 +30,18 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
+$sql = "SELECT id FROM APDH_users where username = '" . $enteredUsername . "'";
+$result = $conn->query($sql);
+$userID = null;
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_array()) {
+       $userID = $row['id'];
+    }
+} else {
+    echo "0 results";
+}
+
 $conn->close();
 
 if ($enteredPassword == $data) {
@@ -39,6 +51,7 @@ if ($enteredPassword == $data) {
 if($success){
 	$_SESSION['username'] = $enteredUsername;
 	$_SESSION['password'] = $enteredPassword; 
+  $_SESSION['userID'] = $userID; 
 	$_SESSION['login'] = true;
 	if($enteredUsername == 'Admin'){
                 $url = "Location: Admin.php";

@@ -15,13 +15,13 @@
                 <?php 
                 	if(isset($_SESSION['username'])){
 						echo 'Welcome, '.$_SESSION['username'];
+            echo '<form method="post" action = "logout.php">';
+            echo '<button type="submit" name="logout">Logout</button>';
+            echo '</form>';
 					} else {
 						echo 'Please log in.';
 					}
                 ?>
-        <form method="post" action = "logout.php">
-			<button type="submit" name="logout">Logout</button>
-		</form>
 
 		<form method="post" action="checkLogin.php">
 			<p> 

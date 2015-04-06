@@ -5,101 +5,110 @@
         <title>Project 5 Homepage</title>
     <script type="text/javascript" src="http://judah/~hensche/Project3/jquery-2.1.3.js"></script>
     <script src="http://judah/~hensche/Project5/Project5.js"></script>
-        <?php
-                session_start();
-        ?>
-        
+    <?php
+        session_start();
+    ?>
 </head>
+
 <body>
         <header>
                 <h1>People's Choice Awards</h1>
         </header>
         <nav>
-                <?php
+            <?php
             $username = $_SESSION['username'];
-                        if(isset($username)){
-                                if($username != 'Admin'){
-                            $url = "Location: project5home.php";
-                            header($url);
-                            exit;               
-                } else {
-                    echo 'Welcome to the admin page';   
-                }
-                        } else {
-                                 $url = "Location: project5home.php";
-                                 header($url);
-                                 exit;
+                    if(isset($username)){
+                            if($username != 'Admin'){
+                        $url = "Location: project5home.php";
+                        header($url);
+                        exit;               
+            } else {
+                echo 'Welcome to the admin page';   
+            }
+                    } else {
+                             $url = "Location: project5home.php";
+                             header($url);
+                             exit;
+                    }
+            ?>
+            <form method = "post" action = "logout.php">  
+                <button type="submit" name = "logout">Logout</button>
+            </form> <br/>
+
+            <form method = "post" action = "openProject.php">
+                <select name="open-proj">
+                        <option value="1">Project1</option>
+                        <option value="2">Project2</option>
+                        <option value="3">Project3</option>
+                        <option value="4">Project4</option>
+                        <option value="5">Project5</option>
+                        <option value="6">Project6</option>
+                        <option value="7">Project7</option>
+                </select>
+                <input type="submit" name="open" value="Open Project"></input>
+                <input type="submit" name="close" formaction= "closeProject.php" value="Close Project"></input>
+            </form>
+            <br/>
+            
+            <form method = "post" action = "maketeams.php">
+                    <select name="projectResults">
+                            <option value="1">Project1</option>
+                            <option value="2">Project2</option>
+                            <option value="3">Project3</option>
+                            <option value="4">Project4</option>
+                            <option value="5">Project5</option>
+                            <option value="6">Project6</option>
+                            <option value="7">Project7</option>
+                    </select>
+                    <input type="submit" name="submitteams" value="Make Teams">
+            </form>
+
+            <form method = "post" action = "newUser.php" onsubmit = "return validateForm()">
+                <br>
+                <label for = "username">New Username:<label>
+                            <input id = "txtUserName" type="text" name="username">
+                <br>
+                <label for = "password">Please enter Passpword:<label>
+                            <input id ="txtNewPassword" type ="password" name = "newPassword">
+                            <br>
+                            <label for = "password2">Please re-enter Passpword:<label>
+                            <input id ="txtConfirmPassword" type ="password" name = "confirmPassword" onchange = "checkPasswordMatch();">
+                <br>
+                <input type="submit" value="Make New User">
+                <br>
+            </form>
+
+            <form method = "post" action = "removeStudent.php">
+                    <select name="removeStudent">
+                    <?php
+                        $servername = "james";
+                        $username = "cs4220";
+                        $password = "";
+                        $dbname = "cs4220";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
                         }
-                ?>
-                <form method = "post" action = "logout.php">  
-                    <button type="submit" name = "logout">Logout</button>
-                </form>
-                <form method = "post" action = "maketeams.php">
-                        <select name="projectResults">
-                                <option value="Project1">Project1</option>
-                                <option value="Project2">Project2</option>
-                                <option value="Project3">Project3</option>
-                                <option value="Project4">Project4</option>
-                                <option value="Project5">Project5</option>
-                                <option value="Project6">Project6</option>
-                                <option value="Project7">Project7</option>
-                        </select>
-                        <input type="submit" value="Make Teams">
-                </form>
-                <br/>
+                        
+                        $sql = "SELECT username FROM APDH_users";
+                        $result = $conn->query($sql);
 
-                <form method = "post" action = "newUser.php" onsubmit = "return validateForm()">
-            <br>
-            <label for = "username">New Username:<label>
-                        <input id = "txtUserName" type="text" name="username">
-            <br>
-            <label for = "password">Please enter Passpword:<label>
-                        <input id ="txtNewPassword" type ="password" name = "newPassword">
-                        <br>
-                        <label for = "password2">Please re-enter Passpword:<label>
-                        <input id ="txtConfirmPassword" type ="password" name = "confirmPassword" onchange = "checkPasswordMatch();">
-            <br>
-            <input type="submit" value="Make New User">
-            <br>
-                </form>
-
-
-
-                 <form method = "post" action = "removeStudent.php">
-                        <select name="removeStudent">
-                        <?php
-
-                                $servername = "james";
-                                $username = "cs4220";
-                                $password = "";
-                                $dbname = "cs4220";
-
-                                // Create connection
-                                $conn = new mysqli($servername, $username, $password, $dbname);
-                                // Check connection
-                                if ($conn->connect_error) {
-                                        die("Connection failed: " . $conn->connect_error);
-                                    }
-                            
-                            $sql = "SELECT username FROM APDH_users";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                    // output data of each row
-                                while($row = $result->fetch_assoc()) {
-                                    echo '<option value ="' . $row["username"]. '">'. $row["username"].'</option>';
-                                }
-                            } else {
-                                    echo "0 results";
+                        if ($result->num_rows > 0) {
+                                // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                echo '<option value ="' . $row["username"]. '">'. $row["username"].'</option>';
                             }
-                            $conn->close();
-                        ?>                        
-                        </select>
-                        <input type="submit" value="Remove User">
-                </form>
-
-
-
+                        } else {
+                                echo "0 results";
+                        }
+                        $conn->close();
+                    ?>                        
+                    </select>
+                    <input type="submit" value="Remove User">
+            </form>
         </nav>
         <main>
 
