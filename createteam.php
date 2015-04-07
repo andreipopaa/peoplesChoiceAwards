@@ -61,7 +61,7 @@
     
     $conn->close();
 
-    $url = "Location: maketeams.php";
+  $url = "Location: maketeams.php";
 	header($url);
 	exit;
 ?>     

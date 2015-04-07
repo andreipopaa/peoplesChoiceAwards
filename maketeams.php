@@ -42,7 +42,9 @@
                             }
                         }
                     } else {
-                        echo "0 results";
+                        $url = "Location: Admin.php";
+                        header($url);
+                        exit;
                     }
 
                     $conn->close();

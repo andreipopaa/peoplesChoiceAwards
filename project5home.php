@@ -62,7 +62,7 @@
 		
         </nav>
         <main>
-
+            <?php include 'createTable.php'; ?>
         </main>
         <footer>
                 <h4>Page created by Dillon and Andrei</h4>
