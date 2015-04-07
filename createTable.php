@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     $servername = "james";
     $username = "cs4220";
     $password = "";
@@ -47,7 +49,7 @@
 
     echo "<tr>";
         echo "<td></td>";
-        for ($j = 0; $j <= sizeof($users); $j++) {
+        for ($j = 0; $j < sizeof($projIds); $j++) {
             echo "<td>Project " . $projIds[$j] . "</td>";
         }
     echo "</tr>";

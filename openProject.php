@@ -32,7 +32,7 @@
     while($row = $result->fetch_assoc()) {
       if ($row["username"] != "Admin") {
         // 
-        $sql = "INSERT INTO APDH_userProject (projectID, userID) VALUES('" . $projectID . "', '" . $row["id"] . "')";
+        $sql = "INSERT INTO APDH_userProject (projectID, userID, gold, silver, bronze, total, userRank) VALUES('" . $projectID . "', '" . $row["id"] . "', 0, 0, 0, 0)";
         if ($conn->query($sql) === TRUE) {
           echo "Update successful.";
         } else {

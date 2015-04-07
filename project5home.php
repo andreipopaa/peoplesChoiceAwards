@@ -73,6 +73,7 @@
                     $username = "cs4220";
                     $password = "";
                     $dbname = "cs4220";
+                    $projID = 
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);
